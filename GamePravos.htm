@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+
+<SCRIPT language="JavaScript">
+<!-- Begin
+
+/* ******* 
+   Do not use non-SCRIPT comments, because Netscape "appears" to have a bug which causes redraws to take forever/hang!!
+
+   Both "ID" and "NAME" are used to declare an element.  "ID" is the HTML4 standard, but for backward compatibility 
+   "NAME" is also used.  There appears to be no conflict with this approach, but this comment is here in case that the 
+   future brings/spawns new problems, as each new browser is released. 
+
+   I am using two letter leaders for string references (ex: de, cs), three letters for ID/NAME leaders (lay, div), and 
+   four letters for macros (uses, ...). 
+******* */
+
+drImages = "./Images/"; // Relative reference to the images directory. ("." is "current HTML file directory")
+
+usesLayers = false;//(document.layers)? true:false;
+usesDivs = true;//(document.all)? true:false;
+
+usesStyles = true;//((document.layers) || (document.all))? true:false;
+
+// Netscape doesn't appear to support OnMouse events for images.  IE works, and with new Netscape versions they will too.
+csTips = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + // The 3D menu makes the Tips/Services appear off-center, so massage them.
+         "<IMG ID='imgTips' NAME='imgTips' SRC='" + drImages + "TipOut.gif'" +
+         " OnMouseOut=src='" + drImages + "TipOut.gif' OnMouseOver=src='" + drImages + "TipOver.gif' TITLE='" +
+         "To &quot;re-view&quot; this summary page, just move the mouse to the MicroRealities Gaming logo.'>" +
+         "         &nbsp;" +
+         "         <IMG SRC='" + drImages + "TipOut.gif'" +
+         " OnMouseOut=src='" + drImages + "TipOut.gif' OnMouseOver=src='" + drImages + "TipOver.gif' TITLE='" +
+         "To &quot;preview&quot; a section, simply move the mouse over one of the menu buttons.'>" +
+         "         &nbsp;" +
+         "         <IMG SRC='" + drImages + "TipOut.gif'" +
+         " OnMouseOut=src='" + drImages + "TipOut.gif' OnMouseOver=src='" + drImages + "TipOver.gif' TITLE='" +
+         "This site is best viewed at 1280x1024, and at a brightness/contrast level that causes &quot;the middle&quot; of the vertical divider to completely disappear.'>";
+
+csSummaryExtra = "<P>" +
+                 // Insert any extra summary data here (that makes sense and was not done in CustomizedSummaries()). 
+                 "" +
+                 "</P>";
+
+// End -->
+</SCRIPT>
+
+<HEAD>
+   <TITLE>MicroRealities Gaming - GAME Pravos INFO</TITLE>
+
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Navigation.js"></SCRIPT> 
+
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/GamePravos.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/GamePravosEvents.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/GamePravosFeatures.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/GamePravosPlaying.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/GamePravosPricing.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/GamePravosSupport.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/GamePravosForums.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/GamePravosDownloads.js"></SCRIPT> 
+
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Current/GamePravos.js"></SCRIPT> 
+
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Shortcuts/GamePravos.js"></SCRIPT> 
+
+   <SCRIPT LANGUAGE="JavaScript">
+   <!-- Begin
+
+   function ShowTips( cssTop, cssWidth ) 
+   {
+      if (usesLayers)
+      {
+         document.write( "<LAYER WIDTH='" + cssWidth + "' LEFT='0' TOP='" + cssTop + "'>" +
+                         "   <CENTER>" + 
+                                csTips +
+                         "   </CENTER>" +
+                         "</LAYER>" );
+      }
+      else
+      if (usesDivs)
+      {
+         document.write( "<DIV STYLE='position: absolute; width:" + cssWidth + "px; left:0px; top:" + cssTop + "px'>" +
+                         "   <CENTER>" + 
+                                csTips +
+                         "   </CENTER>" +
+                         "</DIV>" );
+      }
+   }
+
+   function CustomizeSummaries() 
+   {
+      if (usesStyles)
+      { 
+         // Insert latest and recent game info into this GamePravos page.
+         csSummary = "<CENTER><BR>" +
+                     "<TABLE WIDTH='100%' COLS='2'>" +
+                     "   <TR>" +
+                     "      <TD ALIGN='center' VALIGN='middle'>" +
+                               csLatestGamePravos + 
+                     "      </TD>" +
+                     "      <TD ALIGN='right' VALIGN='top'>" +
+                               csShortcutsGamePravos +
+                     "      </TD>" +
+                     "   </TR>" +
+                     "   <TR><TD><BR><BR></TD></TR>" + // A couple blank lines for easier reading.
+                     "   <TR>" +
+                     "      <TD ALIGN='left' COLSPAN='2' VALIGN='middle'>" +
+                               csCurrentGamePravos + 
+                               csSummaryExtra +
+                     "      </TD>" +
+                     "   </TR>" +
+                     "</TABLE>" +
+                     "</CENTER>";
+      }
+   }
+
+   // End -->
+   </SCRIPT>
+
+ </HEAD>
+
+<BODY BGCOLOR="black" TEXT="white">    
+
+   <SCRIPT language="JavaScript">
+   <!-- Begin
+      DrawNavigationDividor( "DividorV.jpg" );
+
+      DrawLogo( 135 ); // Not using NavigationWidth.
+
+      DrawWhatPage( eval(document.imgLogo.height + VPaddingAboveWhatPage), NavigationWidth, "GamePravos" );
+
+      DrawMenu( "mrgMenuGame.jpg", 2,
+                eval(document.imgLogo.height + VPaddingAboveWhatPage + VSizeOfWhatPage + VPaddingAroundMenu), 
+                NavigationWidth, 6,
+                "", "events",
+                "", "features",
+                "", "playing",
+                "", "pricing",
+                "", "support",
+                "", "downloads", 
+                "", "");
+
+      DisabledMenuItems( 2, eval(document.imgLogo.height + VPaddingAboveWhatPage + VSizeOfWhatPage + VPaddingAroundMenu), 
+                         NavigationWidth, 6, 
+                         "GamePravosEvents", "No events will be scheduled until BETA",
+                         "GamePravosFeatures", "Game mechanics and story details are coming SOON",
+                         "GamePravosPlaying", "Game play features coming SOON", 
+                         "GamePravosPricing", "No pricing information has been released",
+                         "GamePravosSupport", "No support is needed until Pravos is in BETA",
+                         "GamePravosDownloads", "No downloads currently available",
+                         "", "" );
+
+      ShowTips( eval(document.imgLogo.height + 
+                     VPaddingAboveWhatPage + VSizeOfWhatPage + 
+                     VPaddingAroundMenu + document.imgMenu.height + VPaddingAroundMenu),
+                NavigationWidth );
+
+      CustomizeSummaries();
+
+      CreateStylizedSummaries( 10, eval(NavigationWidth + 100), "self", 
+                               "GamePravosEvents", "GamePravosFeatures", "GamePravosPlaying", "GamePravosPricing", 
+                               "GamePravosSupport", "GamePravosDownloads", "" );
+
+      DrawContent( "Summary", "visible" );
+
+      DrawCopyrights( eval(document.imgLogo.height + 
+                           VPaddingAboveWhatPage + VSizeOfWhatPage + 
+                           VPaddingAroundMenu + document.imgMenu.height + VPaddingAroundMenu +
+                           document.imgTips.height + 20),
+                      NavigationWidth );
+   // End -->
+   </SCRIPT>
+
+</BODY>
+
+</HTML>

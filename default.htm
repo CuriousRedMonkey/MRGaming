@@ -1,0 +1,384 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<HTML>
+
+<SCRIPT language="JavaScript">
+<!-- Begin
+
+/* ******* 
+   Do not use non-SCRIPT comments a lot, because Netscape "appears" to have a bug which causes redrawing forever/hangs !!
+
+   Both "ID" and "NAME" are used to declare an element.  "ID" is the HTML4 standard, but for backward compatibility 
+   "NAME" is also used.  There appears to be no conflict with this approach, but this comment is here in case that the 
+   future brings/spawns new problems, as each new browser is released. 
+
+   I am using two letter leaders for string references (ex: dr, cs), three letters for ID/NAME leaders (lay, div), and 
+   four letters for macros (uses, ...). 
+******* */
+
+drImages = "./Images/"; // Relative reference to the images directory. ("." is "current HTML file directory")
+drFAQs = "./FAQs/";
+
+//Could use (navigator.appName.substring(0,8) == "Netscape" && parseFloat(navigator.appVersion) >= 4.02)? true:false; or
+// (navigator.appName.substring(0,9) == "Microsoft" && parseFloat(navigator.appVersion) >= 4)? true:false, but why bother?
+
+usesLayers = false;//(document.layers)? true:false;
+usesDivs = true;//(document.all)? true:false;
+
+usesStyles = true;//((document.layers) || (document.all))? true:false;
+
+// Within each "htm" page there exists a "csSummary" string.  It contains the quick content for that page (help, 
+// shortcuts, content-related high-profile issues, etc.).  It is not meant to be fancy, web aware, or have so much
+// data (buttons, images, etc.) that it starts to impact bandwidth.  Keep it simple and quick, but relevent.
+// Note: Browsers that do not support the TABLE syntax (or certain 4.0 standards) will not have best formatting possible.
+
+// Note: I do not know why (nor how to get rid of) Netscape's showing of the right-scroll-bar, when no data is there.
+//       It is strictly a cosmetic issue that does not interfere with the positive benefits of on-the-fly resizable 
+//       windows.
+
+// Netscape doesn't appear to support OnMouse events for images.  IE works, and with new Netscape versions they will too.
+csTips = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + // The 3D menu makes the Tips/Services appear off-center, so massage them.
+         "<IMG ID='imgTips' NAME='imgTips' SRC='" + drImages + "TipOut.gif'" +
+         " OnMouseOut=src='" + drImages + "TipOut.gif' OnMouseOver=src='" + drImages + "TipOver.gif' Title='" +
+         "To &quot;re-view&quot; this summary page, just move the mouse to the MicroRealities Gaming logo.'>" +
+         "         &nbsp;" +
+         "         <IMG SRC='" + drImages + "TipOut.gif'" +
+         " OnMouseOut=src='" + drImages + "TipOut.gif' OnMouseOver=src='" + drImages + "TipOver.gif' Title='" +
+         "To &quot;preview&quot; a section, simply move the mouse over one of the menu buttons.'>" +
+         "         &nbsp;" +
+         "         <IMG SRC='" + drImages + "TipOut.gif'" +
+         " OnMouseOut=src='" + drImages + "TipOut.gif' OnMouseOver=src='" + drImages + "TipOver.gif' Title='" +
+         "This site is best viewed at 1280x1024, and at a brightness/contrast level that causes &quot;the middle&quot; of the vertical divider to completely disappear.'>";
+
+csSummary = "<TABLE WIDTH='100%'>" +
+            "   <TR ALIGN='center'>" +
+            "      <TD>" +
+            "         <IMG SRC='" + drImages + "txtWelcome.gif' TITLE='" +
+            "Welcome to MicroRealities Gaming.  Get ready for a whole new definition in gaming...'>" +
+            "      </TD>" +
+            "   </TR>" +
+            "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+            "   <TR ALIGN='center'>" +
+            "      <TD>" +
+            "         <A HREF='GamePravos.htm'>" + 
+            "            <IMG BORDER='0' SRC='" + drImages + "mrgLogoFantasy.jpg'" + 
+            "             TITLE='Pravos - A fantasy game'></A>" + 
+            "                  <A HREF='GameOpsrav.htm'>" +
+            "                     <IMG BORDER='0' SRC='" + drImages + "mrgLogoFuturistic.jpg'" + 
+            "                      TITLE='Opsrav - A futuristic game'></A>" +
+            "                  <A HREF='GameVoraps.htm'>" +
+            "                     <IMG BORDER='0' SRC='" + drImages + "mrgLogoPrehistoric.jpg'" + 
+            "                      TITLE='Voraps - A prehistoric game'></A>" +
+            "      </TD>" +
+            "   </TR>" +
+            "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+            "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+            "   <TR>" +
+            "      <TD ALIGN='center' VALIGN='middle'>" +
+            "         <TABLE ALIGN='center' VALIGN='middle' BORDER='1' BORDERCOLOR='#F1E6C6'>" +
+            "            <TR ALIGN='center'>" +
+            "               <TD ALIGN='center' BACKGROUND='./Images/faqBackground.jpg'>" +
+            "                  <A HREF='TheIdea.htm'>" + // REQUIRED: No space between <IMG..> and </A>.
+            "                     <IMG BORDER='0' SRC='" + drImages + "btnTheIdea.gif'" +
+            "                      TITLE='The idea and reasons behind MicroRealities Gaming'></A>" +
+            "                  <A HREF='TheEngine.htm'>" + 
+            "                     <IMG BORDER='0' SRC='./Images/btnTheEngine.gif'" +
+            "                      TITLE='The engine that runs the MicroRealities Games'></A>" +
+            "                  <A HREF='ThePlan.htm'>" + 
+            "                     <IMG BORDER='0' SRC='./Images/btnThePlan.gif'" +
+            "                      TITLE='The plan and milestones for MicroRealities Gaming'></A>" +
+            "               </TD>" +
+            "            </TR>" +
+            "         </TABLE>" +
+            "      </TD>" +
+            "   </TR>" +
+            "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+            "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+            "   <TR>" +
+            "      <TD ALIGN='center' VALIGN='middle'>" +
+            "         <TABLE ALIGN='center' VALIGN='middle' BORDER='1' BORDERCOLOR='#F1E6C6'>" +
+            "            <TR ALIGN='center'>" +
+            "               <TD ALIGN='center' BACKGROUND='./Images/faqBackground.jpg'>" +
+            "                  <A HREF='./FAQs/General.htm'>" +
+            "                     <IMG BORDER='0' SRC='./Images/faqHeader.gif' TITLE='Frequently Asked Questions'></A>" +
+            "               </TD>" +
+            "               <TD ALIGN='center'>" +
+            "                  <A HREF='./Forums.htm'>" +
+            "                     <IMG BORDER='0' SRC='./Images/forHeader.gif' TITLE='Forums'></A>" +
+            "               </TD>" +
+            "               <TD ALIGN='center' BGCOLOR='#000080'>" +
+            "                  <A HREF='./Images/ConceptArt/index.htm'>" +
+            "                     <IMG BORDER='0' SRC='./Images/caHeader.gif' TITLE='Concept Art'></A>" +
+            "               </TD>" +
+            "            </TR>" +
+            "         </TABLE>" +
+            "      </TD>" +
+            "   </TR>" +
+            "   <TR ALIGN='center'>" +
+            "      <TD>" +
+            "         <FONT COLOR='#F1E6D6'>" +
+            "         <P><i><small>" +
+            "            <BR><BR>" +
+            "            * Click on any of the links above, or follow your interests in the navigation area " +
+            "              (left-side of page)." +
+            "      </small></i></P>" +
+            "         </FONT>" +
+            "      </TD>" +
+            "   </TR>" +
+            "</TABLE>";
+
+/* ******* */
+/* Status of the service availability. */
+/* Note: For now use a hardcoded toggle for reboots.  In the future there will be JAVA code that detects the status. */
+/* ******* */
+stChatGame = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + // The 3D menu makes the Tips/Services appear off-center, so massage them.
+                "<IMG TITLE='Chat service is shutdown' SRC='" + drImages + "ChatDown.jpg' ID='imgChat' NAME='imgChat'>" 
+              + "<IMG TITLE='The game is shutdown' SRC='" + drImages + "GameDown.jpg'>" 
+             /* Toggle
+              + "<IMG TITLE='Visitors may chat' SRC='" + drImages + "ChatUp.jpg' ID='imgChat' NAME='imgChat'>" 
+             Toggle */                
+             /* Toggle
+              + "<IMG TITLE='Alpha testers may enter' SRC='" + drImages + "GameUp.jpg'>"
+             Toggle */                
+;
+
+// End -->
+</SCRIPT>
+
+<HEAD>
+   <TITLE>MicroRealities Gaming</TITLE>
+
+   <META NAME="AUTHOR" CONTENT="MicroRealities">
+   <META NAME="DESCRIPTION" CONTENT="MrGaming, developer of virtual realities and server-based games.">
+   <META NAME="KEYWORDS" CONTENT="Game, Company, Developer, Virtual Reality, Client Server, MMORPG, MORPG, CRPG, RPG, MUD">
+
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Navigation.js"></SCRIPT> 
+
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/News.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/Game.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/GameWorlds.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/Contact.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/ContactBusiness.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Latest/Misc.js"></SCRIPT> 
+
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Shortcuts/News.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Shortcuts/Game.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Shortcuts/GamePravos.js"></SCRIPT> 
+   <SCRIPT LANGUAGE="JavaScript" SRC="Includes/Shortcuts/Misc.js"></SCRIPT> 
+
+   <SCRIPT LANGUAGE="JavaScript">
+   <!-- Begin
+
+   function ShowTips( cssTop, cssWidth ) 
+   {
+      if (usesLayers)
+      {
+         document.write( "<LAYER WIDTH='" + cssWidth + "' LEFT='0' TOP='" + cssTop + "'>" +
+                         "   <CENTER>" + 
+                                csTips +
+                         "   </CENTER>" +
+                         "</LAYER>" );
+      }
+      else
+      if (usesDivs)
+      {
+         document.write( "<DIV STYLE='position: absolute; width:" + cssWidth + "px; left:0px; top:" + cssTop + "px'>" +
+                         "   <CENTER>" + 
+                                csTips +
+                         "   </CENTER>" +
+                         "</DIV>" );
+      }
+   }
+
+   function ShowServicesStatus( cssTop, cssWidth ) 
+   {
+      if (usesLayers)
+      {
+         document.write( "<LAYER WIDTH='" + cssWidth + "' LEFT='0' TOP='" + cssTop + "'>" +
+                         "   <CENTER>" + 
+                             stChatGame +
+                         "   </CENTER>" +
+                         "</LAYER>" );
+      }
+      else
+      if (usesDivs)
+      {
+         document.write( "<DIV STYLE='position: absolute; width:" + cssWidth + "px; left:0px; top:" + cssTop + "px'>" +
+                         "   <CENTER>" + 
+                            stChatGame +
+                         "   </CENTER>" +
+                         "</DIV>" );
+      }
+   }
+
+   function CustomizeSummaries() 
+   {
+      if (usesStyles)
+      {
+         csLatestNews = "<TABLE WIDTH='100%' COLS='2'>" +
+                        "   <TR>" +
+                        "      <TD ALIGN='left' VALIGN='middle'>" +
+                                  csLatestNews + 
+                        "      </TD>" +
+                        "      <TD ALIGN='right' VALIGN='top'>" +
+                                  csShortcutsNews +
+                        "      </TD>" +
+                        "   </TR>" +
+                        "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+                        "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+                        "   <TR ALIGN='center'>" +
+                        "      <TD>" +
+                        "         <FONT COLOR='#F1E6D6'>" +
+                        "         <P><i><small>" +
+                        "             <BR><BR>" +
+                        "            * Click on any of the links above, or visit the 'News' page for old news, archives," +
+                        "              and the 'first web site'." +
+                        "         </small></i></P>" +
+                        "         </FONT>" +
+                        "      </TD>" +
+                        "   </TR>" +
+                        "</TABLE>";
+
+         // Uses an invisible table to group forums/screenshots on one line, and wrap correctly when resizing.
+         csLatestGame = "<TABLE WIDTH='100%' ALIGN='center' VALIGN='middle'>" +
+                        "   <TR>" +
+                        "      <TD ALIGN='center' VALIGN='middle'>" +
+                                  csLatestGameWorlds + 
+                        "      </TD>" +
+                        "   </TR>" +                           
+                        "   <TR><TD><BR></TD></TR>" + // Separate with a line
+                        "   <TR><TD><BR></TD></TR>" + // Separate with a line
+                        "   <TR>" +
+                        "      <TD ALIGN='center' VALIGN='middle'>" +
+                                  csShortcutsGamePravos + 
+                        "      </TD>" +
+                        "   </TR>" +
+                        "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+                        "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+                        "   <TR ALIGN='center'>" +
+                        "      <TD>" +
+                        "         <FONT COLOR='#F1E6D6'>" +
+                        "         <P><i><small>" +
+                        "             <BR><BR>" +
+                        "            * Click on any of the links above, or visit the 'Game' page for info on the" +
+                        "              user interfaces and development tools." +
+                        "         </small></i></P>" +
+                        "         </FONT>" +
+                        "      </TD>" +
+                        "   </TR>" +
+                        "</TABLE>";
+
+         csLatestContact = "<TABLE WIDTH='100%' ALIGN='center'>" +
+                           "   <TR>" +
+                           "      <TD ALIGN='center' VALIGN='middle'>" +
+                                     csLatestContactBusiness + 
+                           "      </TD>" +
+                           "   </TR>" +
+                           "   <TR><TD><BR></TD></TR>" + // Separate with a line
+                           "   <TR><TD><BR></TD></TR>" + // Separate with a line
+                           "   <TR>" +
+                           "      <TD ALIGN='center' VALIGN='middle'>" +
+                                     csLatestContact + 
+                           "      </TD>" +
+                           "   </TR>" +
+                           "</TABLE>";
+
+         csLatestMisc = "<TABLE WIDTH='100%' ALIGN='center'>" +
+                        "   <TR>" +
+                        "      <TD ALIGN='center'>" +
+                                  csShortcutsMisc +
+                        "      </TD>" +
+                        "   </TR>" +
+                        "   <TR>" +
+                        "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+                        "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+                        "      <TD ALIGN='center'>" +
+                                  csLatestMisc + 
+                        "      </TD>" +
+                        "   </TR>" +
+                        "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+                        "   <TR><TD><BR></TD></TR>" + // Separate the rows with a blank line.
+                        "   <TR ALIGN='center'>" +
+                        "      <TD>" +
+                        "         <FONT COLOR='#F1E6D6'>" +
+                        "         <P><i><small>" +
+                        "             <BR><BR>" +
+                        "            * Click on any of the links above, or visit the 'Misc' page to submit your work for" +
+                        "              the Gallery." +
+                        "         </small></i></P>" +
+                        "         </FONT>" +
+                        "      </TD>" +
+                        "   </TR>" +
+                        "</TABLE>";
+      }
+   }
+
+   // End -->
+   </SCRIPT>
+
+ </HEAD>
+
+<BODY BGCOLOR="black" TEXT="white">    
+
+   <SCRIPT language="JavaScript">
+   <!-- Begin
+      if (usesStyles)
+      {
+      DrawNavigationDividor( "DividorV.jpg" );
+
+      DrawLogo( 135 ); // Using the logo's actual size, not NavigationWidth.
+
+      DrawMenu( "mrgMenuStone.jpg", 6,
+                eval(document.imgLogo.height + VPaddingAroundMenu), NavigationWidth, 4,
+                "News", "News", 
+                "Game", "Game",
+                "Contact", "Contact", 
+                "Misc", "Miscellaneous information",
+                "", "",
+                "", "",
+                "", "" );
+
+      ShowTips( eval(document.imgLogo.height + VPaddingAroundMenu + document.imgMenu.height + 
+                     VPaddingAroundMenu),
+                NavigationWidth );
+
+      ShowServicesStatus( eval(document.imgLogo.height + VPaddingAroundMenu + document.imgMenu.height + 
+                               VPaddingAroundMenu + document.imgTips.height + 20),
+                          NavigationWidth );
+
+      CustomizeSummaries();
+
+      CreateStylizedSummaries( 20, eval(NavigationWidth + 100), "self", "News", "Game", "Contact", "Misc", "", "", "" );
+
+      DrawContent( "Summary", "visible" );
+
+      DrawCopyrights( eval(document.imgLogo.height + VPaddingAroundMenu + document.imgMenu.height +
+                           VPaddingAroundMenu + document.imgTips.height + 20 + document.imgChat.height + 20), 
+                      NavigationWidth );
+      }
+      else
+      {
+      document.write( 
+      "<P>" +
+      "   Welcome to MicroRealities Gaming." +
+      "</P>" +
+      "This page, and in fact this entire web site, uses JavaScript as its primary means of presentation." +
+      "<BR><BR>" +
+      "Your browser is not currently recognized, in its support JavaScript, therefore please click" +
+      "  <FONT COLOR='red'>*<A HREF='NoJavaScript/default_nojs.htm'><FONT COLOR='red'>here</FONT></A>*</FONT>," +
+      "  to view and navigate this web site in its most basic non-JavaScript form." +
+      "<BR><BR>" +
+      "If you would like to see your browser supported on the MrGaming web site, then please send an email to " +
+      "<A HREF='mailto:WebContact@MrGaming.com'>Web Contact</A> and describe your browser name, operating system," +
+      "and any other pertinent data you think we may need (like the URL for the developer of your browser, etc.)." +
+      "<P>" +
+      "   Thank you for visiting our web site - " +
+      "   <A HREF='mailto:WebContact@MrGaming.com'> Web Contact</A>." +
+      "</P>" );
+      }
+   // End -->
+   </SCRIPT>
+
+</BODY>
+
+</HTML>
